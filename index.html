@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Heavy Movers</title>
+<meta name="description" content="Heavy Movers: a co-op physics moving game starring a real moving crew. Carry it, pad it, load it, drive it, and survive the client. Coming to Steam.">
+<meta name="theme-color" content="#17191b">
+<meta property="og:title" content="Heavy Movers">
+<meta property="og:description" content="It's never a three-hour job. A co-op physics moving game starring a real moving crew.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;900&family=Archivo:wght@400;500;700;800&family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Moving day, top to bottom: truck-side hero -> the estimate -> what you do -> the crew -> how it's made -> load-out. */
+:root{
+  --asphalt:#141618; --asphalt-2:#1e2124; --asphalt-3:#272b2f; --line:#33383d;
+  --text:#f0ebe1; --muted:#a8a298;
+  --orange:#ff6d1a; --orange-dk:#b8480b; --pad:#3a6bc4; --pad-soft:#8fb0ec;
+  --kraft:#c79c63; --kraft-dk:#a77d47; --kraft-ink:#2b1e0f;
+  --paper:#f6f1e3; --paper-line:#cfd8e6; --carbon:#2d3f8a; --pen:#c0281d;
+  --shadow:0 18px 40px rgba(0,0,0,.45);
+  --display:"Big Shoulders Stencil Display","Impact","Arial Narrow",sans-serif;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--asphalt:#efe9de;--asphalt-2:#e5ddce;--asphalt-3:#dad0bd;--line:#c9bea9;--text:#17191b;--muted:#5a564d;--orange-dk:#a5420a;--pad-soft:#2a55a3;--shadow:0 14px 30px rgba(60,40,10,.18);color-scheme:light}}
+:root[data-theme="light"]{--asphalt:#efe9de;--asphalt-2:#e5ddce;--asphalt-3:#dad0bd;--line:#c9bea9;--text:#17191b;--muted:#5a564d;--orange-dk:#a5420a;--pad-soft:#2a55a3;--shadow:0 14px 30px rgba(60,40,10,.18);color-scheme:light}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden;overflow-x:clip}
+body{background:var(--asphalt);color:var(--text);font-family:var(--body);font-size:16.5px;line-height:1.55;margin:0;overflow-x:hidden}
+img{max-width:100%;display:block}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+p{margin:0 0 12px;max-width:64ch}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- hero: the side of Joey's truck ---------- */
+.hero{position:relative;overflow:hidden;background:#0c0d0e;color:#f4efe6;isolation:isolate}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(110% 85% at 25% 35%,transparent 0 30%,rgba(8,9,10,.88) 100%),linear-gradient(180deg,rgba(8,9,10,.2) 0,transparent 30% 60%,var(--asphalt) 100%)}
+.hero .wrap{padding-block:36px 72px;display:grid;gap:22px;grid-template-columns:1fr;align-items:end}
+.phone{justify-self:start;display:grid;gap:6px;width:min(290px,100%);background:#0f1112;border:2px solid #3b4046;border-radius:18px;padding:11px 11px 13px;box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.phone .who{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8d949b;display:flex;justify-content:space-between}
+.bubble{background:#2c3136;color:#f4efe6;border-radius:14px 14px 14px 4px;padding:8px 12px;font-size:15.5px;line-height:1.35;justify-self:start;max-width:94%}
+.bubble.late{background:#4a2c18}
+.js .bubble{opacity:0;transform:translateY(6px) scale(.97)}
+.js .bubble.in{opacity:1;transform:none;transition:opacity .35s ease,transform .35s cubic-bezier(.2,.8,.3,1.2)}
+.title h1{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.78;margin:0;font-size:clamp(72px,16vw,188px);letter-spacing:.005em;text-shadow:0 6px 30px rgba(0,0,0,.5)}
+.title h1 .o{color:var(--orange);display:block}
+.tagline{font-family:var(--hand);font-weight:700;font-size:clamp(30px,5vw,46px);line-height:1;transform:rotate(-2deg);transform-origin:left;margin-top:10px}
+.tagline u{text-decoration-color:var(--orange);text-decoration-thickness:4px;text-underline-offset:6px}
+.vibe{font-size:clamp(17px,2.2vw,21px);font-weight:500;color:#ece6db;margin:14px 0 0;max-width:44ch}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;font:800 16.5px/1 var(--body);padding:14px 20px;border-radius:6px;text-decoration:none;border:2px solid transparent;letter-spacing:.01em;cursor:pointer;color:inherit;background:none}
+.btn.primary{background:var(--orange);color:#17191b;box-shadow:0 5px 0 var(--orange-dk)}
+.btn.ghost{border-color:currentColor}
+.btn[aria-disabled="true"]{cursor:default}
+.soon{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:#17191b;color:var(--orange);padding:3px 7px;border-radius:3px;font-weight:500}
+.hero .note{font-family:var(--mono);font-size:12px;color:#b3ada2;letter-spacing:.04em;max-width:70ch}
+
+/* ---------- Frank's voice note ---------- */
+.vm{display:flex;align-items:center;gap:12px;background:#0f1112;color:#f4efe6;border:2px solid #3b4046;border-radius:40px;padding:6px 16px 6px 6px;max-width:100%;cursor:pointer;font:inherit;text-align:left;box-shadow:0 10px 26px rgba(0,0,0,.4)}
+.vm:hover{border-color:var(--orange)}
+.vm .pl{flex:none;width:44px;height:44px;border-radius:50%;background:var(--orange);display:grid;place-items:center;color:#17191b}
+.vm .pl svg{width:18px;height:18px}
+.vm .pl .pause{display:none}
+.vm[aria-pressed="true"] .pl .play{display:none}
+.vm[aria-pressed="true"] .pl .pause{display:block}
+.vm .t{display:grid;gap:5px;min-width:0}
+.vm b{font-size:15px;line-height:1.1}
+.vm small{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a8}
+.vm .bars{display:flex;gap:3px;align-items:center;height:16px}
+.vm .bars i{width:3px;border-radius:2px;background:#5b6168;height:var(--h)}
+.vm .bars i.on{background:var(--orange)}
+
+/* ---------- kraft tape strip ---------- */
+.tape{background:repeating-linear-gradient(90deg,var(--kraft) 0 120px,var(--kraft-dk) 120px 122px);color:var(--kraft-ink);font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(19px,2.8vw,26px);letter-spacing:.06em;white-space:nowrap;overflow:hidden;padding-block:9px;transform:rotate(-1.2deg);margin:-14px -20px 0;position:relative;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.tape span{display:inline-block;padding-left:100%;animation:roll 40s linear infinite}
+@keyframes roll{to{transform:translateX(-100%)}}
+
+section{padding-block:64px}
+section+section{border-top:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+h2{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(40px,6.4vw,72px);line-height:.9;margin:8px 0 16px;text-wrap:balance}
+h3{text-wrap:balance}
+.lede{font-size:clamp(17px,1.9vw,19px)}
+.muted{color:var(--muted)}
+.head-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px 24px}
+.head-row p{margin:0}
+
+/* ---------- Joey's carbon-copy estimate ---------- */
+.estimate-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.estimate-wrap>*{min-width:0}
+.pad{color:#22283a;border-radius:3px;padding:22px 22px 18px;transform:rotate(1.2deg);box-shadow:0 22px 50px rgba(0,0,0,.4),0 0 0 1px rgba(0,0,0,.06);background:repeating-linear-gradient(180deg,var(--paper) 0 31px,var(--paper-line) 31px 32px)}
+.pad-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--carbon);padding-bottom:6px;margin-bottom:4px;gap:10px;flex-wrap:wrap}
+.pad-head b{font-family:var(--display);font-weight:900;font-size:24px;letter-spacing:.04em;color:var(--carbon);text-transform:uppercase}
+.pad-head span{font-family:var(--mono);font-size:11.5px;color:var(--carbon)}
+.pad ol{list-style:none;margin:0;padding:0;font-family:var(--hand);font-size:23px;line-height:32px;color:var(--carbon)}
+.pad li{display:flex;justify-content:space-between;gap:12px}
+.pad li .h{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pad li.add{color:var(--pen)}
+.js .pad li.add{opacity:0;transform:translateX(-8px)}
+.js .pad.in li.add{opacity:1;transform:none;transition:opacity .3s ease,transform .3s ease;transition-delay:calc(var(--i)*.28s)}
+.pad .total{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--carbon);margin-top:4px;padding-top:4px;font-family:var(--hand);font-size:28px;color:var(--carbon)}
+.pad .total s{text-decoration-color:var(--pen);text-decoration-thickness:3px}
+.pad .total b{color:var(--pen);font-size:38px;transform:rotate(-4deg);display:inline-block}
+.pad .sig{font-family:var(--mono);font-size:11px;color:#6b7186;margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ---------- what you do: bento ---------- */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:28px}
+.tile{min-width:0;position:relative;background:var(--asphalt-2);border-radius:8px;padding:18px;display:grid;gap:6px;align-content:start;overflow:hidden;border:1px solid var(--line);grid-column:span 2}
+.tile.w3{grid-column:span 3}
+.tile.w4{grid-column:span 4}
+.tile .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pad-soft)}
+.tile h3{margin:0;font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:28px;line-height:.95;letter-spacing:.01em}
+.tile p{margin:0;color:var(--muted);font-size:15.5px}
+.tile p b{color:var(--text);font-weight:700}
+.tile .big{font-family:var(--display);font-weight:900;font-size:44px;line-height:.9;color:var(--orange);font-variant-numeric:tabular-nums}
+.tile.shot{padding:0;min-height:260px;align-content:end;color:#f4efe6;border:0}
+.tile.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.tile.shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(8,9,10,.92) 100%)}
+.tile.shot .cap{position:relative;z-index:1;padding:18px;display:grid;gap:6px}
+.tile.shot p{color:#d9d3c8}
+.tile.shot p b{color:#fff}
+.tile.shot .tag{color:#ffb27f}
+.early{position:absolute;top:10px;right:10px;z-index:1;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(10,11,12,.75);color:#f4efe6;border:1px solid rgba(255,255,255,.25);padding:3px 7px;border-radius:3px}
+.tile.hot{background:var(--orange);color:#17191b;border:0}
+.tile.hot .tag{color:#17191b;opacity:.7}
+.tile.hot p{color:#2a1a0c}
+.tile.hot .big{color:#17191b}
+
+/* incidents: sticky-note chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.chips li{background:var(--asphalt-2);border:1px solid var(--line);border-radius:30px;padding:6px 13px;font-size:14.5px;font-weight:500}
+.chips li:nth-child(3n+1){border-color:var(--orange)}
+.chips li b{color:var(--orange)}
+
+/* ---------- screenshots ---------- */
+.gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:12px;margin-top:26px}
+.gallery figure{margin:0;position:relative;border-radius:8px;overflow:hidden;background:var(--asphalt-2);min-width:0}
+.gallery figure:first-child{grid-row:span 2}
+.gallery img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;transition:transform .6s ease}
+.gallery figure:first-child img{aspect-ratio:auto}
+.gallery figcaption{position:absolute;left:10px;bottom:10px;right:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:#f4efe6;background:rgba(10,11,12,.72);padding:5px 9px;border-radius:4px;width:fit-content;max-width:calc(100% - 20px)}
+.shotnote{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px;letter-spacing:.03em}
+
+/* ---------- crew slider ---------- */
+.slider{position:relative;margin-top:24px}
+.track{display:grid;grid-auto-flow:column;grid-auto-columns:min(300px,82%);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:2px;padding:4px 2px 18px;margin:0;list-style:none;scrollbar-width:thin;scrollbar-color:var(--orange) transparent;overscroll-behavior-x:contain}
+.track::-webkit-scrollbar{height:6px}
+.track::-webkit-scrollbar-thumb{background:var(--orange);border-radius:3px}
+.card{scroll-snap-align:start;min-width:0;background:var(--asphalt-2);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:9px;align-content:start;position:relative;transition:border-color .2s ease,transform .2s ease}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;border-radius:8px 8px 0 0;background:var(--pad)}
+.card.boss::before{background:var(--kraft)}
+.card.you::before{background:var(--orange)}
+.card .role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pad-soft);margin-top:4px}
+.card .name{font-family:var(--display);font-weight:900;font-size:46px;line-height:.85;text-transform:uppercase}
+.card q{font-family:var(--hand);font-size:26px;line-height:1.02;color:var(--orange);quotes:"\201C" "\201D"}
+.card p{margin:0;font-size:15px;color:var(--muted)}
+.card .vm{margin-top:4px;padding-right:12px}
+.card .vm .pl{width:38px;height:38px}
+.ctrls{display:flex;gap:8px;align-items:center}
+.ctrls button{width:46px;height:46px;border-radius:50%;border:2px solid var(--text);background:none;color:var(--text);display:grid;place-items:center;cursor:pointer;transition:background .15s,color .15s,opacity .15s}
+.ctrls button:hover:not(:disabled){background:var(--orange);border-color:var(--orange);color:#17191b}
+.ctrls button:disabled{opacity:.3;cursor:default}
+.ctrls svg{width:20px;height:20px}
+.ctrls .count{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:5ch;text-align:center}
+.real{margin-top:18px;display:flex;gap:16px;align-items:flex-start;max-width:720px}
+.stamp{flex:none;font-family:var(--display);font-weight:900;text-transform:uppercase;color:var(--pen);border:3px solid var(--pen);padding:3px 9px;transform:rotate(-6deg);font-size:19px;letter-spacing:.06em;border-radius:3px;margin-top:2px}
+.real p{margin:0}
+
+/* ---------- how it's made ---------- */
+.made{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start;margin-top:26px}
+.made>*{min-width:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;background:var(--asphalt-2);border-radius:8px;padding:14px 16px;border-left:4px solid var(--orange)}
+.steps li:nth-child(even){border-left-color:var(--pad)}
+.steps .n{grid-row:span 2;font-family:var(--display);font-weight:900;font-size:36px;line-height:.9;color:var(--orange);min-width:2.2ch;font-variant-numeric:tabular-nums}
+.steps li:nth-child(even) .n{color:var(--pad-soft)}
+.steps h3{margin:0;font-size:17px;line-height:1.25}
+.steps p{margin:0;color:var(--muted);font-size:15px}
+.face{margin:0;position:relative;border-radius:8px;overflow:hidden;background:#2a2624}
+.face img{width:100%;aspect-ratio:720/845;object-fit:cover}
+.face figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 14px 12px;background:linear-gradient(180deg,transparent,rgba(10,11,12,.85));color:#f4efe6;font-size:14px}
+.face figcaption b{display:block;font-family:var(--display);font-size:24px;text-transform:uppercase;letter-spacing:.02em}
+.furn{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 0;padding:0;list-style:none}
+.furn li{background:#d9d9d9;border-radius:6px;overflow:hidden;position:relative}
+.furn img{width:100%;aspect-ratio:292/218;object-fit:cover}
+.furn span{position:absolute;left:4px;bottom:4px;font-family:var(--mono);font-size:10.5px;background:rgba(20,22,24,.82);color:#f4efe6;padding:2px 6px;border-radius:3px}
+.furn-cap{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:8px;letter-spacing:.03em}
+.stack{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.stack li{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--line);border-radius:4px;padding:6px 10px;background:var(--asphalt-2)}
+.stack li b{color:var(--orange);font-weight:500}
+
+/* coming: torn paper list */
+.coming{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:22px 0 0;padding:0;list-style:none}
+.coming li{border:2px dashed var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:3px}
+.coming b{font-family:var(--display);font-size:22px;text-transform:uppercase;line-height:1}
+.coming span{font-size:14.5px;color:var(--muted)}
+
+/* ---------- load-out ---------- */
+.loadout{background:var(--orange);color:#17191b;border-top:0}
+.loadout .wrap{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
+.loadout h2{margin-bottom:6px}
+.loadout .kicker{color:#17191b;opacity:.7}
+.loadout p{font-size:18px;margin:0}
+.loadout .btn.primary{background:#17191b;color:#f4efe6;box-shadow:0 5px 0 #000}
+.loadout .btn.primary .soon{background:var(--orange);color:#17191b}
+footer{padding-block:22px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+footer a{color:inherit}
+
+/* ---------- trailer slot ---------- */
+.trailer{padding-block:34px 8px;border-top:0}
+.trailer+section{border-top:0}
+.tv{margin:0;display:grid;gap:10px}
+.tv video{width:100%;aspect-ratio:16/9;border-radius:10px;background:#0c0d0e center/cover no-repeat;box-shadow:var(--shadow);border:2px solid var(--line)}
+.tv figcaption{font-size:15px;color:var(--muted);display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.trailer[hidden]{display:none}
+
+/* ---------- reveal ---------- */
+.js .rv{opacity:0;transform:translateY(18px)}
+.js .rv.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+
+@media (hover:hover){
+  .tile.shot:hover img,.gallery figure:hover img{transform:scale(1.04)}
+  .card:hover{border-color:var(--orange);transform:translateY(-3px)}
+  .btn.primary:hover{transform:translateY(-2px)}
+  .btn{transition:transform .12s ease,box-shadow .12s ease}
+}
+@media (min-width:820px){
+  .hero .wrap{grid-template-columns:1fr auto;padding-block:48px 84px}
+  .hero .phone{grid-column:2;grid-row:1}
+  .hero .title{grid-column:1;grid-row:1 / span 2}
+  .hero .ctas,.hero .note{grid-column:1 / -1}
+}
+@media (max-width:900px){
+  .estimate-wrap,.made{grid-template-columns:1fr;gap:32px}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .tile,.tile.w3{grid-column:span 1}
+  .tile.w4{grid-column:span 2}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  section{padding-block:48px}
+  .bento{grid-template-columns:1fr}
+  .tile,.tile.w3,.tile.w4{grid-column:auto}
+  .gallery{grid-template-columns:1fr}
+  .gallery figure:first-child{grid-row:auto}
+  .gallery figure:first-child img{aspect-ratio:16/9}
+  .pad{transform:none;padding:18px 16px 14px}
+  .pad ol{font-size:21px}
+  .real{flex-direction:column;gap:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tape span{animation:none;padding-left:16px}
+  .js .rv,.js .bubble,.js .pad li.add{opacity:1!important;transform:none!important;transition:none!important}
+  .tile.shot img,.gallery img,.card,.btn{transition:none!important}
+  .track{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<audio id="frank" preload="none" src="assets/frank.mp3"></audio>
+
+<header class="hero">
+  <img class="bg" src="assets/hero.jpg" alt="" fetchpriority="high">
+  <div class="wrap">
+    <div class="phone" role="group" aria-label="Text messages from Joey">
+      <div class="who"><span>Joey</span><span>6:12 AM</span></div>
+      <div class="bubble">booked the maple st job. client says small move, just a few boxes.</div>
+      <div class="bubble">truck's at 7</div>
+      <div class="bubble late">bring the piano board just in case</div>
+    </div>
+    <div class="title">
+      <h1>Heavy <span class="o">Movers</span></h1>
+      <div class="tagline">It's <u>never</u> a three-hour job.</div>
+      <p class="vibe">A co-op physics moving game starring a real moving crew. Lift it, pad it, load it, drive it, and survive the client.</p>
+    </div>
+    <div class="ctas">
+      <a class="btn primary" role="link" aria-disabled="true">Wishlist on Steam <span class="soon">Soon</span></a>
+      <button class="vm" type="button" aria-pressed="false" data-frank>
+        <span class="pl" aria-hidden="true"><svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></span>
+        <span class="t"><b>Hear Frank</b><span class="bars" aria-hidden="true"></span><small>Voice note · 0:06</small></span>
+      </button>
+    </div>
+    <div class="note">1–4 movers · real physics, questionable decisions · Skidney, Cape Breakdown (mind the potholes)</div>
+  </div>
+</header>
+
+<div class="tape" aria-hidden="true"><span>This side up · Heavy · Fragile · Kitchen (probably) · Do not drop · Heavy to the cab · Lift with your legs · PIVOT · This side up · Heavy · Fragile · Kitchen (probably) · Do not drop · Heavy to the cab · Lift with your legs · PIVOT ·</span></div>
+
+<main>
+  <section class="trailer" id="trailer" aria-label="Trailer">
+    <div class="wrap">
+      <figure class="tv rv">
+        <video controls playsinline preload="none" poster="assets/trailer_poster.jpg">
+          <source src="assets/trailer.mp4" type="video/mp4">
+        </video>
+        <figcaption><span class="kicker">Mini trailer</span> Frank walks you through a day on the truck. <b style="color:var(--orange)">Early build:</b> not the final graphics. The game already looks way better; check out the new faces further down.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap estimate-wrap">
+      <div class="rv">
+        <div class="kicker">The job</div>
+        <h2>“Just a few boxes,” said every client ever</h2>
+        <p class="lede">You're the new guy on a real moving crew. Joey built the company on a flip phone, a carbon-copy estimate pad and a reputation: no website, no app, and still booked solid. Every morning he texts the job. Then the client opens the door, and the "small move" is thirteen thousand pounds of somebody's life.</p>
+        <p class="muted">Nobody ever packed the kitchen.</p>
+      </div>
+      <div class="pad rv" role="img" aria-label="Estimate based on what the customer described: 3 hours; with everything the customer didn't mention: 11 hours">
+        <div class="pad-head"><b>Heavy Movers</b><span>Estimate № 0147 · as described by customer</span></div>
+        <ol>
+          <li><span>2 bdrm, 1 floor, "just a few boxes"</span><span class="h">3 hrs</span></li>
+          <li class="add" style="--i:1"><span>+ piano (nobody mentioned)</span><span class="h">2 hrs</span></li>
+          <li class="add" style="--i:2"><span>+ kitchen not packed</span><span class="h">1½ hrs</span></li>
+          <li class="add" style="--i:3"><span>+ second floor (there is one)</span><span class="h">2 hrs</span></li>
+          <li class="add" style="--i:4"><span>+ the ex showed up</span><span class="h">1 hr</span></li>
+          <li class="add" style="--i:5"><span>+ dog took a sock</span><span class="h">½ hr</span></li>
+          <li class="add" style="--i:6"><span>+ Huge Stop on the way</span><span class="h">1 hr</span></li>
+        </ol>
+        <div class="total"><span>Total: <s>3 hrs</s></span><b>11 hrs</b></div>
+        <div class="sig">Extras billed at the hourly rate · Joey always gets paid</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head-row rv">
+        <div><div class="kicker">What you do</div><h2>Every piece weighs what it weighs</h2></div>
+        <p class="muted">Real physics on everything you touch. And a crew that won't shut up about how you're touching it.</p>
+      </div>
+      <div class="bento">
+        <div class="tile w4 shot rv">
+          <img src="assets/oldtown.jpg" alt="The Heavy Movers truck parked on an Old Town street with the ramp down and a dolly at the curb" loading="lazy">
+          <span class="early">Early build</span><div class="cap"><span class="tag">Carry</span><h3>Lift with your legs. Then PIVOT.</h3><p>A box of books drags. A dresser sags and sways. Couches need a buddy on the other end who moves when you move, and a pivot at every doorway. Clip the frame and watch an <b>$800</b> dresser turn into <b>$340</b>.</p></div>
+        </div>
+        <div class="tile hot rv">
+          <span class="tag">A small move</span>
+          <div class="big">3,000 lb</div>
+          <p>That's the light end. Big houses run to thirteen thousand, and somebody always has a piano.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tag">Pad · wrap · dolly</span>
+          <h3>Do it right</h3>
+          <p>Pad the furniture (fold the pads right, Sean is watching), shrink-wrap the couch, bag the bolts in the parts box. Hand trucks, four-wheelers and an appliance dolly that thuds down every single stair.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tag">Load the truck</span>
+          <h3>Truck Tetris</h3>
+          <p>Heavy to the cab, tiers wall to wall, strap every tier. Self-packed grocery boxes that don't stack. A sloppy load is something going over in the back on the highway.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tag">Co-op</span>
+          <div class="big">1–4</div>
+          <p>Online or on the same network, with a join code. Or work solo with the crew covering the other end of the couch.</p>
+        </div>
+        <div class="tile w3 shot rv">
+          <img src="assets/road.jpg" alt="The Heavy Movers truck heading down a two-lane highway out of town" loading="lazy">
+          <span class="early">Early build</span><div class="cap"><span class="tag">Drive</span><h3>It leans. It brakes long.</h3><p>Drive the loaded truck through town and down the highway: lights, four-way stops, tailgaters, road ragers, a moose, the weigh station, and the cruiser in your mirrors. Pit stop at the Huge Stop for pizza burgers. Or hand Mike the keys.</p></div>
+        </div>
+        <div class="tile w3 rv">
+          <span class="tag">Fights · optional</span>
+          <h3>Sometimes it ends in the parking lot</h3>
+          <p>Rival moving companies race you to jobs, block the driveway and lowball your clients. Settle it with fists, a tire iron or a dolly charge. Taunts: the finger, a butt, coffee in the eyes, drop the gloves, shirt over the head. Hit a client, though, and kiss the tip and the pay goodbye.</p>
+        </div>
+        <div class="tile w3 rv">
+          <span class="tag">Clients</span>
+          <h3>Every client is somebody</h3>
+          <p>Snobby on the Ridge, chatty in Old Town, grumpy everywhere. Chat them up for tips, pat the dog, keep your hands off Grandma's hutch. The client grabs the other end and walks the wrong way. The new boyfriend tries to lift the fridge.</p>
+        </div>
+        <div class="tile w3 rv">
+          <span class="tag">The crew</span>
+          <h3>Roast them back</h3>
+          <p>Roast whoever you're looking at, and they fire right back. Fill the roast meter and the whole crew goes <b>TURBO</b>. Whole conversations in the cab, a Bluetooth war over the stereo, the boys' group chat buzzing on your phone.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tag">Your company</span>
+          <h3>Start your own</h3>
+          <p>Name, colours and an emblem on the shirts and the truck. Weekly contracts against other crews, and the leaderboards.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tag">Get stronger</span>
+          <h3>Level up</h3>
+          <p>Lifting, care, driving and stamina go up the more you work. Hit the gym, get a tattoo or a haircut (the crew notices). Sell the odd finds to Lenny at the pawn shop. He lowballs you.</p>
+        </div>
+        <div class="tile rv">
+          <span class="tag">Your phone</span>
+          <h3>Joey texts</h3>
+          <p>The job, the pay, the twist. Some nights: <i>"need a favour. tonight. 3am. its an easy one. cash."</i> Don't open the crate.</p>
+        </div>
+      </div>
+
+      <h3 class="rv" style="margin:34px 0 0;font-family:var(--display);font-size:32px;text-transform:uppercase;line-height:1">Something is always going on</h3>
+      <ul class="chips rv" aria-label="Things that happen on the job">
+        <li>The couch is <b>stuck in the door</b></li>
+        <li>The ex shows up for the lamp</li>
+        <li>The dog bolts with a sock</li>
+        <li>A <b>bag of cash</b> under the bed (pocket it, or don't)</li>
+        <li>The hoarder house</li>
+        <li>A piano on the stairs</li>
+        <li>The mother-in-law has opinions</li>
+        <li>A <b>burst pipe</b> in the laundry room</li>
+        <li>A cat hiding in a box</li>
+        <li>Bees over the garage stuff</li>
+        <li>The elevator jams, dresser inside</li>
+        <li>The teenager won't leave their room</li>
+        <li>A <b>raccoon</b></li>
+        <li>Somebody's car blocking the ramp</li>
+        <li>Dentures under the couch</li>
+        <li>The "clean" house: pizza in the couch, four kids, nobody did the dishes</li>
+        <li>The parking officer</li>
+        <li>A toddler in a box</li>
+      </ul>
+
+      <div class="gallery">
+        <figure class="rv"><img src="assets/judge.jpg" alt="The crew, dollies and hand trucks out front of a big yellow house in the woods, a long-haul trailer at the curb" loading="lazy"><figcaption>The Judge's House: a two-day job, into a 53-foot trailer</figcaption></figure>
+        <figure class="rv"><img src="assets/downtown.jpg" alt="The moving truck double-parked on a downtown street in the rain, by a bakery and a pizza place" loading="lazy"><figcaption>Downtown: no parking, switchback stairs</figcaption></figure>
+        <figure class="rv"><img src="assets/road.jpg" alt="" loading="lazy" style="object-position:70% 50%"><figcaption>Thanks for visiting Skidney</figcaption></figure>
+      </div>
+      <p class="shotnote"><b style="color:var(--orange)">Early screenshots.</b> These are from an older work-in-progress build: placeholder townsfolk, unfinished lighting, nothing polished yet. The game has been upgraded a lot since (new faces, new furniture, real houses), and new shots are coming.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head-row rv">
+        <div><div class="kicker">The crew</div><h2>A real crew. Every one of them playable.</h2></div>
+        <div class="ctrls" aria-label="Crew carousel controls">
+          <button type="button" data-dir="-1" aria-label="Previous crew member" aria-controls="crew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <span class="count" aria-hidden="true">1 / 8</span>
+          <button type="button" data-dir="1" aria-label="Next crew member" aria-controls="crew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="slider rv" role="region" aria-roledescription="carousel" aria-label="The crew">
+        <ul class="track" id="crew" tabindex="0" aria-label="Crew cards, scroll sideways">
+          <li class="card you" role="group" aria-roledescription="slide" aria-label="1 of 8: Danny"><div class="role">You · the tip getter</div><div class="name">Danny</div><q>Anything you need, man.</q><p>Tattooed drummer, half deaf from the drums (“what?”). Great with clients and a bit of a flirt. Flips his glasses up to read the box tags. Says please and thanks.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="2 of 8: Frank"><div class="role">Joey's son</div><div class="name">Frank</div><q>Did you know a moose can swim six miles?</q><p>The funniest guy on the crew. One story rolls into the next, and he's got a fact for every animal you pass. Runs on Yepsi Cola and a smoke after a smoke.</p>
+            <button class="vm" type="button" aria-pressed="false" data-frank><span class="pl" aria-hidden="true"><svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></span><span class="t"><b>Hear Frank</b><small>His real voice, cloned</small></span></button></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="3 of 8: Mike"><div class="role">Lead hand</div><div class="name">Mike</div><q>It's not pretty, but it'll do.</q><p>The hardest worker on the crew and the one who teaches the new guys everything. Loads the truck like Tetris and runs every job. Nine lives, barely sleeps, and still the first one on the truck.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="4 of 8: Antonio"><div class="role">The crew's soundtrack</div><div class="name">Antonio</div><q>Boombastic, baby.</q><p>Twenty-five and fluent in slang (“bet”, “no cap”). Sings and raps all day, on every carry. Lives on modern hip hop and trap. A big guy and a good guy.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="5 of 8: Jordan"><div class="role">Guitar · the Bay</div><div class="name">Jordan</div><q>It's carbon monoxide poisoning back here, boys.</q><p>Little metalhead, air guitar on the ramp. Quotes podcasts nobody's heard of and believes in ghosts and aliens. Runs on coffee and Zonks. Proud of Glaze Bay.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="6 of 8: Sean"><div class="role">Pads · drives the truck</div><div class="name">Sean</div><q>Where are you going with all these four-wheelers? An office move?</q><p>Freakishly flexible: a leg behind his head on every break. Does most of the padding and hates a badly folded pad. Funny. Talks about his daughter and his car.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="7 of 8: Blaine"><div class="role">Forty years in</div><div class="name">Blaine</div><q>You're doing a good job, buddy.</q><p>Forty years in the business, thirty behind the wheel, and does most of the driving. Quiet. When he does talk, it's usually to tell you you did good.</p></li>
+          <li class="card boss" role="group" aria-roledescription="slide" aria-label="8 of 8: Joey"><div class="role">The owner</div><div class="name">Joey</div><q>Nice lawns. Stay off the lawns.</q><p>A sharp businessman. Wins the bids, lands the contracts and keeps every truck busy from his office and a flip phone. Never lifts a thing. Doesn't need to.</p></li>
+        </ul>
+      </div>
+      <div class="real rv">
+        <span class="stamp">Real crew</span>
+        <p class="muted">The lead developer is one of the guys above, and the rest of the crew keep telling him how to make it better. Built from real jobs and real personalities, and the crew's real voices are going in.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="rv">
+        <div class="kicker">How it's made</div>
+        <h2>Built on the truck. Finished at night.</h2>
+        <p class="lede">Heavy Movers is made by a working mover. Days on the truck, nights on the game, and a pile of machines that keep building while everybody sleeps.</p>
+      </div>
+      <div class="made">
+        <ol class="steps">
+          <li class="rv"><span class="n">01</span><h3>Real jobs, real crew</h3><p>The stairs, the pivots, the self-packed boxes and the clients come from actual moves. The crew checks it and tells him what's wrong.</p></li>
+          <li class="rv"><span class="n">02</span><h3>Their real voices</h3><p>Recorded on the job, then cloned with AI, only with each guy's OK. Frank's is in: over 4,700 lines of him. The rest of the crew are on the way.</p></li>
+          <li class="rv"><span class="n">03</span><h3>A face factory</h3><p>Every night a batch of brand-new townsfolk gets built with Unreal Engine's MetaHuman: different ages, builds, hair and skin. Each one gets checked by eye before it's kept.</p></li>
+          <li class="rv"><span class="n">04</span><h3>A furniture factory</h3><p>Another night shift in Blender turns out dozens of new couches, dressers and bookshelves, each with its own size, style and real weight in pounds.</p></li>
+          <li class="rv"><span class="n">05</span><h3>No two houses alike</h3><p>Seeded households decide who lives there and what they own, from the hoarder's basement to the condo on the Ridge, across 15 job areas plus the town and the highway.</p></li>
+          <li class="rv"><span class="n">06</span><h3>Tested nonstop</h3><p>Over 1,300 automated tests run around the clock in a second test lane, plus overnight soak runs that play the career for days, so the couch doesn't end up in a tree.</p></li>
+        </ol>
+        <div class="rv">
+          <figure class="face">
+            <img src="assets/face02.jpg" alt="A young woman with a brown bob, rendered by the face factory" loading="lazy">
+            <figcaption><b>Off the face factory</b>One of last night's batch. Coming to a sidewalk in Skidney.</figcaption>
+          </figure>
+          <ul class="furn" aria-label="Pieces from the furniture factory">
+            <li><img src="assets/f_armchair.jpg" alt="Tufted leather armchair" loading="lazy"><span>80 lb</span></li>
+            <li><img src="assets/f_couch.jpg" alt="Tan leather sofa" loading="lazy"><span>165 lb</span></li>
+            <li><img src="assets/f_dresser.jpg" alt="Pale blue farmhouse dresser" loading="lazy"><span>124 lb</span></li>
+            <li><img src="assets/f_bookshelf.jpg" alt="Tall antique bookcase" loading="lazy"><span>183 lb</span></li>
+            <li><img src="assets/f_chair2.jpg" alt="Coral armchair on tapered legs" loading="lazy"><span>53 lb</span></li>
+            <li><img src="assets/f_nightstand.jpg" alt="Worn wooden nightstand" loading="lazy"><span>38 lb</span></li>
+          </ul>
+          <p class="furn-cap">One night's furniture factory run. The box is for scale.</p>
+        </div>
+      </div>
+      <ul class="stack rv" aria-label="Built with">
+        <li><b>Engine</b> Unity</li>
+        <li><b>Physics</b> NVIDIA PhysX</li>
+        <li><b>Faces</b> MetaHuman</li>
+        <li><b>Furniture</b> Blender</li>
+        <li><b>Voices</b> real crew, AI-cloned with consent</li>
+        <li><b>Co-op</b> online, 1–4</li>
+        <li><b>Controls</b> keyboard, full controller, Steam Deck target</li>
+      </ul>
+
+      <h3 class="rv" style="margin:36px 0 0;font-family:var(--display);font-size:32px;text-transform:uppercase;line-height:1">On the way</h3>
+      <ul class="coming">
+        <li class="rv"><b>Frank narrates</b><span>Frank telling the story of your career, in his own voice.</span></li>
+        <li class="rv"><b>Hangouts</b><span>Cutscenes of the boys between jobs: smoke breaks on the tailgate, stories, a dolly race.</span></li>
+        <li class="rv"><b>Pratfalls</b><span>Trips on the stairs, a wet ramp, a sofa pinning somebody.</span></li>
+        <li class="rv"><b>Silly shenanigans</b><span>Bowling night with the boys, darts at the bar, racing a rival crew to the job, popping Jordan's bubble wrap, a war over the truck's Bluetooth, and a client with way too many pool noodles.</span></li>
+        <li class="rv"><b>Dances</b><span>Moves any character can bust out, for when the job's done (or isn't).</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="loadout">
+    <div class="wrap">
+      <div>
+        <div class="kicker">Load-out</div>
+        <h2>Coming to Steam</h2>
+        <p>The Steam page opens soon. Wishlist it and Steam will tell you the day it lands.</p>
+      </div>
+      <a class="btn primary" role="link" aria-disabled="true">Wishlist on Steam <span class="soon">Soon</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Heavy Movers · a <a href="https://psilo.dev">psilo.dev</a> game</span>
+    <span>Skidney, Cape Breakdown · Pothole Alley at Seagull Blvd</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document,root=d.documentElement;root.classList.remove('no-js');root.classList.add('js');
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // reveal on scroll + Joey's bubbles + the estimate's add-ons
+  var targets=[].slice.call(d.querySelectorAll('.rv,.pad'));
+  var bubbles=[].slice.call(d.querySelectorAll('.bubble'));
+  if(still||!('IntersectionObserver' in window)){targets.concat(bubbles).forEach(function(e){e.classList.add('in')})}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    targets.forEach(function(e){io.observe(e)});
+    bubbles.forEach(function(b,i){setTimeout(function(){b.classList.add('in')},350+i*650)});
+  }
+
+  // trailer slot: hide it if the video isn't there yet
+  var tv=d.querySelector('#trailer video'),src=tv&&tv.querySelector('source');
+  if(src){src.addEventListener('error',function(){d.getElementById('trailer').hidden=true});
+    fetch(src.getAttribute('src'),{method:'HEAD'}).then(function(r){if(!r.ok)d.getElementById('trailer').hidden=true}).catch(function(){});}
+
+  // crew slider
+  var track=d.getElementById('crew'),prev=d.querySelector('[data-dir="-1"]'),next=d.querySelector('[data-dir="1"]'),count=d.querySelector('.ctrls .count');
+  var cards=[].slice.call(track.children);
+  function step(){return cards[1]?cards[1].offsetLeft-cards[0].offsetLeft:track.clientWidth}
+  function update(){
+    var max=track.scrollWidth-track.clientWidth-2;
+    prev.disabled=track.scrollLeft<=2;next.disabled=track.scrollLeft>=max;
+    var i=Math.round(track.scrollLeft/step());
+    var shown=Math.max(1,Math.round(track.clientWidth/step()));
+    var last=Math.min(cards.length,i+shown);
+    count.textContent=(shown>1?(i+1)+'–'+last:(i+1))+' / '+cards.length;
+  }
+  [prev,next].forEach(function(b){b.addEventListener('click',function(){
+    track.scrollBy({left:step()*+b.getAttribute('data-dir'),behavior:still?'auto':'smooth'});
+  })});
+  track.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();track.scrollBy({left:step()*(e.key==='ArrowRight'?1:-1),behavior:still?'auto':'smooth'})}
+  });
+  var t;track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(update,60)},{passive:true});
+  window.addEventListener('resize',update);update();
+
+  // Frank's voice note
+  var a=d.getElementById('frank'),btns=[].slice.call(d.querySelectorAll('[data-frank]'));
+  var bars=d.querySelector('.vm .bars'),N=22,hs=[6,10,14,9,16,12,7,15,11,8,13,16,10,6,12,15,9,14,7,11,13,8];
+  if(bars){for(var k=0;k<N;k++){var i=d.createElement('i');i.style.setProperty('--h',hs[k]+'px');bars.appendChild(i)}}
+  function sync(){var on=!a.paused&&!a.ended;btns.forEach(function(b){b.setAttribute('aria-pressed',on?'true':'false')})}
+  btns.forEach(function(b){b.addEventListener('click',function(){if(a.paused){a.play()}else{a.pause()}})});
+  ['play','pause','ended'].forEach(function(ev){a.addEventListener(ev,sync)});
+  a.addEventListener('ended',function(){a.currentTime=0});
+  a.addEventListener('timeupdate',function(){
+    if(!bars||!a.duration)return;var n=Math.round(N*a.currentTime/a.duration);
+    [].forEach.call(bars.children,function(e,j){e.classList.toggle('on',j<n)});
+  });
+})();
+</script>
+</body>
+</html>
