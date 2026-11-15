@@ -46,7 +46,6 @@ p{margin:0 0 12px;max-width:64ch}
 .phone{justify-self:start;display:grid;gap:6px;width:min(290px,100%);background:#0f1112;border:2px solid #3b4046;border-radius:18px;padding:11px 11px 13px;box-shadow:0 18px 40px rgba(0,0,0,.55)}
 .phone .who{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8d949b;display:flex;justify-content:space-between}
 .bubble{background:#2c3136;color:#f4efe6;border-radius:14px 14px 14px 4px;padding:8px 12px;font-size:15.5px;line-height:1.35;justify-self:start;max-width:94%}
-.bubble.late{background:#4a2c18}
 .js .bubble{opacity:0;transform:translateY(6px) scale(.97)}
 .js .bubble.in{opacity:1;transform:none;transition:opacity .35s ease,transform .35s cubic-bezier(.2,.8,.3,1.2)}
 .title h1{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.78;margin:0;font-size:clamp(72px,16vw,188px);letter-spacing:.005em;text-shadow:0 6px 30px rgba(0,0,0,.5)}
@@ -136,8 +135,7 @@ h3{text-wrap:balance}
 /* incidents: sticky-note chips */
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
 .chips li{background:var(--asphalt-2);border:1px solid var(--line);border-radius:30px;padding:6px 13px;font-size:14.5px;font-weight:500}
-.chips li:nth-child(3n+1){border-color:var(--orange)}
-.chips li b{color:var(--orange)}
+.chips li b{font-weight:inherit}
 
 /* ---------- screenshots ---------- */
 .gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:12px;margin-top:26px}
@@ -273,9 +271,10 @@ footer a{color:inherit}
   <div class="wrap">
     <div class="phone" role="group" aria-label="Text messages from Joey">
       <div class="who"><span>Joey</span><span>6:12 AM</span></div>
-      <div class="bubble">booked the maple st job. client says small move, just a few boxes.</div>
+      <div class="bubble">booked the maple st job</div>
       <div class="bubble">truck's at 7</div>
-      <div class="bubble late">bring the piano board just in case</div>
+      <div class="bubble">client says it's just a few boxes</div>
+      <div class="bubble">also there's a piano. bring the piano board</div>
     </div>
     <div class="title">
       <h1>Heavy <span class="o">Movers</span></h1>
@@ -418,7 +417,6 @@ footer a{color:inherit}
         <li>Dentures under the couch</li>
         <li>The "clean" house: pizza in the couch, four kids, nobody did the dishes</li>
         <li>The parking officer</li>
-        <li>A toddler in a box</li>
       </ul>
 
       <div class="gallery">
@@ -436,21 +434,23 @@ footer a{color:inherit}
         <div><div class="kicker">The crew</div><h2>A real crew. Every one of them playable.</h2></div>
         <div class="ctrls" aria-label="Crew carousel controls">
           <button type="button" data-dir="-1" aria-label="Previous crew member" aria-controls="crew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <span class="count" aria-hidden="true">1 / 8</span>
+          <span class="count" aria-hidden="true">1 / 10</span>
           <button type="button" data-dir="1" aria-label="Next crew member" aria-controls="crew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
       <div class="slider rv" role="region" aria-roledescription="carousel" aria-label="The crew">
         <ul class="track" id="crew" tabindex="0" aria-label="Crew cards, scroll sideways">
-          <li class="card you" role="group" aria-roledescription="slide" aria-label="1 of 8: Danny"><div class="role">You · the tip getter</div><div class="name">Danny</div><q>Anything you need, man.</q><p>Tattooed drummer, half deaf from the drums (“what?”). Great with clients and a bit of a flirt. Flips his glasses up to read the box tags. Says please and thanks.</p></li>
-          <li class="card" role="group" aria-roledescription="slide" aria-label="2 of 8: Frank"><div class="role">Joey's son</div><div class="name">Frank</div><q>Did you know a moose can swim six miles?</q><p>The funniest guy on the crew. One story rolls into the next, and he's got a fact for every animal you pass. Runs on Yepsi Cola and a smoke after a smoke.</p>
+          <li class="card you" role="group" aria-roledescription="slide" aria-label="1 of 10: Danny"><div class="role">You · the tip getter</div><div class="name">Danny</div><q>Anything you need, man.</q><p>Tattooed drummer, half deaf from the drums (“what?”). Great with clients and a bit of a flirt. Flips his glasses up to read the box tags. Says please and thanks.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="2 of 10: Frank"><div class="role">Joey's son</div><div class="name">Frank</div><q>Did you know a moose can swim six miles?</q><p>The funniest guy on the crew. One story rolls into the next, and he's got a fact for every animal you pass. Runs on Yepsi Cola and a smoke after a smoke.</p>
             <button class="vm" type="button" aria-pressed="false" data-frank><span class="pl" aria-hidden="true"><svg class="play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg></span><span class="t"><b>Hear Frank</b><small>His real voice, cloned</small></span></button></li>
-          <li class="card" role="group" aria-roledescription="slide" aria-label="3 of 8: Mike"><div class="role">Lead hand</div><div class="name">Mike</div><q>It's not pretty, but it'll do.</q><p>The hardest worker on the crew and the one who teaches the new guys everything. Loads the truck like Tetris and runs every job. Nine lives, barely sleeps, and still the first one on the truck.</p></li>
-          <li class="card" role="group" aria-roledescription="slide" aria-label="4 of 8: Antonio"><div class="role">The crew's soundtrack</div><div class="name">Antonio</div><q>Boombastic, baby.</q><p>Twenty-five and fluent in slang (“bet”, “no cap”). Sings and raps all day, on every carry. Lives on modern hip hop and trap. A big guy and a good guy.</p></li>
-          <li class="card" role="group" aria-roledescription="slide" aria-label="5 of 8: Jordan"><div class="role">Guitar · the Bay</div><div class="name">Jordan</div><q>It's carbon monoxide poisoning back here, boys.</q><p>Little metalhead, air guitar on the ramp. Quotes podcasts nobody's heard of and believes in ghosts and aliens. Runs on coffee and Zonks. Proud of Glaze Bay.</p></li>
-          <li class="card" role="group" aria-roledescription="slide" aria-label="6 of 8: Sean"><div class="role">Pads · drives the truck</div><div class="name">Sean</div><q>Where are you going with all these four-wheelers? An office move?</q><p>Freakishly flexible: a leg behind his head on every break. Does most of the padding and hates a badly folded pad. Funny. Talks about his daughter and his car.</p></li>
-          <li class="card" role="group" aria-roledescription="slide" aria-label="7 of 8: Blaine"><div class="role">Forty years in</div><div class="name">Blaine</div><q>You're doing a good job, buddy.</q><p>Forty years in the business, thirty behind the wheel, and does most of the driving. Quiet. When he does talk, it's usually to tell you you did good.</p></li>
-          <li class="card boss" role="group" aria-roledescription="slide" aria-label="8 of 8: Joey"><div class="role">The owner</div><div class="name">Joey</div><q>Nice lawns. Stay off the lawns.</q><p>A sharp businessman. Wins the bids, lands the contracts and keeps every truck busy from his office and a flip phone. Never lifts a thing. Doesn't need to.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="3 of 10: Mike"><div class="role">Lead hand</div><div class="name">Mike</div><q>It's not pretty, but it'll do.</q><p>The hardest worker on the crew and the one who teaches the new guys everything. Loads the truck like Tetris and runs every job. Nine lives, barely sleeps, and still the first one on the truck.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="4 of 10: Antonio"><div class="role">The crew's soundtrack</div><div class="name">Antonio</div><q>Boombastic, baby.</q><p>Twenty-five and fluent in slang (“bet”, “no cap”). Sings and raps all day, on every carry. Lives on modern hip hop and trap. A big guy and a good guy.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="5 of 10: Jordan"><div class="role">Guitar · the Bay</div><div class="name">Jordan</div><q>It's carbon monoxide poisoning back here, boys.</q><p>Little metalhead, air guitar on the ramp. Quotes podcasts nobody's heard of and believes in ghosts and aliens. Runs on coffee and Zonks. Proud of Glaze Bay.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="6 of 10: Sean"><div class="role">Pads · drives the truck</div><div class="name">Sean</div><q>Where are you going with all these four-wheelers? An office move?</q><p>Freakishly flexible: a leg behind his head on every break. Does most of the padding and hates a badly folded pad. Funny. Talks about his daughter and his car.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="7 of 10: Blaine"><div class="role">Forty years in</div><div class="name">Blaine</div><q>You're doing a good job, buddy.</q><p>Forty years in the business, thirty behind the wheel, and does most of the driving. Quiet. When he does talk, it's usually to tell you you did good.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="8 of 10: Harry"><div class="role">Strong · always on a call</div><div class="name">Harry</div><p>Strong, and really good at what he does. Speaks great English. Always on a call with his friends or his sister, earbuds in, even mid-carry.</p></li>
+          <li class="card" role="group" aria-roledescription="slide" aria-label="9 of 10: Dave"><div class="role">Warehouse</div><div class="name">Dave</div><q>Where's my lunch?</q><p>The warehouse guy. If it's in storage, he knows where it is.</p></li>
+          <li class="card boss" role="group" aria-roledescription="slide" aria-label="10 of 10: Joey"><div class="role">The owner</div><div class="name">Joey</div><q>Nice lawns. Stay off the lawns.</q><p>A sharp businessman. Wins the bids, lands the contracts and keeps every truck busy from his office and a flip phone. Never lifts a thing. Doesn't need to.</p></li>
         </ul>
       </div>
       <div class="real rv">
