@@ -1,16 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 72" width="480" height="288" role="img" aria-label="Heavy Movers truck">
   <title>Heavy Movers truck</title>
-  <defs>
-    <linearGradient id="o" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F26B1D"/>
-      <stop offset="1" stop-color="#D2520F"/>
-    </linearGradient>
-  </defs>
   <g stroke="#1D1A18" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
     <!-- box -->
-    <path d="M6 10 h68 v42 h-68 z" fill="url(#o)"/>
+    <path d="M6 10 h68 v42 h-68 z" fill="#F26B1D"/>
     <!-- cab -->
-    <path d="M74 22 h20 l14 14 v16 h-34 z" fill="url(#o)"/>
+    <path d="M74 22 h20 l14 14 v16 h-34 z" fill="#F26B1D"/>
     <!-- window -->
     <path d="M80 27 h12 l9 9 h-21 z" fill="#F7EBDD" stroke-width="3"/>
     <!-- bumper line -->
