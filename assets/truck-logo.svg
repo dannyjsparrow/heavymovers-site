@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 72" width="480" height="288" role="img" aria-label="Heavy Movers truck">
+  <title>Heavy Movers truck</title>
+  <defs>
+    <linearGradient id="o" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F26B1D"/>
+      <stop offset="1" stop-color="#D2520F"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#1D1A18" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <!-- box -->
+    <path d="M6 10 h68 v42 h-68 z" fill="url(#o)"/>
+    <!-- cab -->
+    <path d="M74 22 h20 l14 14 v16 h-34 z" fill="url(#o)"/>
+    <!-- window -->
+    <path d="M80 27 h12 l9 9 h-21 z" fill="#F7EBDD" stroke-width="3"/>
+    <!-- bumper line -->
+    <path d="M6 52 h102" fill="none"/>
+    <!-- wheels -->
+    <circle cx="26" cy="56" r="9" fill="#1D1A18"/>
+    <circle cx="90" cy="56" r="9" fill="#1D1A18"/>
+  </g>
+  <circle cx="26" cy="56" r="3.2" fill="#F7EBDD"/>
+  <circle cx="90" cy="56" r="3.2" fill="#F7EBDD"/>
+  <!-- HM on the box -->
+  <text x="40" y="39" text-anchor="middle" font-family="Impact, 'Anton', 'Arial Black', sans-serif" font-size="20" font-style="italic" fill="#1D1A18" letter-spacing="1">HM</text>
+</svg>
