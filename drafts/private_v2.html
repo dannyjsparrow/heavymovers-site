@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#141618"><link rel="icon" type="image/svg+xml" href="/assets/truck-logo.svg"><title>Heavy Movers crew sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;900&family=Archivo:wght@400;500;700;800&family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* One thing at a time: short header -> sign on -> rate the guys (one card open) -> extras behind small buttons. Flat colours only. */
+:root{--asphalt:#141618;--asphalt-2:#1e2124;--asphalt-3:#272b2f;--line:#33383d;--text:#f0ebe1;--muted:#a8a298;--orange:#ff6d1a;--orange-dk:#b8480b;--pad:#3a6bc4;--pad-soft:#8fb0ec;--kraft:#c79c63;--kraft-ink:#2b1e0f;--pen:#ff8a7a;--good:#7fd18b;
+--display:"Big Shoulders Stencil Display","Impact","Arial Narrow",sans-serif;--body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;--hand:"Caveat","Comic Sans MS",cursive;--mono:"IBM Plex Mono",ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:light){:root{--asphalt:#efe9de;--asphalt-2:#e5ddce;--asphalt-3:#dad0bd;--line:#c9bea9;--text:#17191b;--muted:#5a564d;--orange-dk:#a5420a;--pad-soft:#2a55a3;--pen:#c0281d;--good:#23803a}}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;background:var(--asphalt);color:var(--text);font:16px/1.45 var(--body)}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--display);font-weight:900;text-transform:uppercase;margin:0;line-height:.95}
+.o{color:var(--orange)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:800 17px/1 var(--body);min-height:48px;padding:14px 20px;border-radius:6px;border:2px solid transparent;cursor:pointer;color:inherit;background:none;text-decoration:none}
+.btn.primary{background:var(--orange);color:#17191b;box-shadow:0 5px 0 var(--orange-dk)}
+.btn.alt{border-color:var(--line);background:var(--asphalt-2)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.hero{position:relative;overflow:hidden;background:#0c0d0e;color:#f4efe6;isolation:isolate}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(8,9,10,.45)}
+.hero .wrap{padding:32px 16px 28px}
+.tl{display:block;width:80px;height:auto;margin:0 0 10px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;color:var(--kraft);text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:clamp(52px,16vw,96px)}
+.hero h1.calm{text-transform:none;font-family:var(--body);font-weight:800;font-size:clamp(32px,8vw,46px);line-height:1.1;letter-spacing:0}
+.hero p.sub{font-size:18px;max-width:42ch;margin:10px 0 20px;color:#e9e3d7}
+.perk{background:var(--orange);color:#17191b;padding:10px 0;font-size:15px;line-height:1.35;font-weight:700}
+.strip{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.badge{font:900 15px/1 var(--display);text-transform:uppercase;letter-spacing:.05em;background:var(--kraft);color:var(--kraft-ink);padding:8px 11px;border-radius:4px}
+.badge.aw{background:var(--orange);color:#17191b}
+.ladder{font:500 13px/1.6 var(--mono);color:var(--muted)}
+.ladder b{color:var(--text)}
+.lab{font:500 12px/1 var(--mono);letter-spacing:.12em;color:var(--kraft);text-transform:uppercase;margin:24px 0 8px}
+.panel{background:var(--asphalt-2);border:1px solid var(--line);border-radius:8px;padding:16px;margin:0 0 14px}
+.note{border-left:4px solid var(--orange);padding:4px 0 4px 12px;margin:14px 0;color:var(--muted)}
+.note b{color:var(--text)}
+.who{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0}
+.who button{min-height:56px;border:2px solid var(--line);background:var(--asphalt-2);color:var(--text);border-radius:6px;font:900 22px/1 var(--display);text-transform:uppercase;cursor:pointer}
+.who button:hover{border-color:var(--orange)}
+input[type=text],input[type=password],input[type=number],select,textarea{width:100%;padding:12px;border:2px solid var(--line);border-radius:6px;background:var(--asphalt-3);color:var(--text);font:inherit;font-size:17px}
+textarea{min-height:64px;font-family:var(--hand);font-size:22px;color:var(--pen)}
+label.t{display:block;font:700 14px/1.2 var(--body);margin:12px 0 5px}
+.err{color:var(--pen);min-height:22px;margin:6px 0}
+.err:empty{min-height:0;margin:0}
+.sub{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:0 12px}
+.sub summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font:900 17px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--kraft)}
+.sub[open]{padding-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chips button{min-height:40px;padding:0 12px;border:2px solid var(--line);background:var(--asphalt-3);color:var(--text);border-radius:20px;font:700 14px/1 var(--body);cursor:pointer}
+.lines{margin:8px 0 0;padding-left:20px}
+.lines li{margin:6px 0}
+.lines i{color:var(--muted);font-style:normal;font-size:13px}
+.ig{display:flex;gap:12px;align-items:flex-start;margin-top:12px;font-size:15px;cursor:pointer}
+.ig input{width:24px;height:24px;flex:none;margin:0;accent-color:var(--orange)}
+.link{background:none;border:0;color:var(--pad-soft);text-decoration:underline;cursor:pointer;padding:10px 0;font:inherit}
+/* folds: extra info, closed by default */
+details.fold{border-bottom:1px solid var(--line)}
+details.fold summary{cursor:pointer;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;list-style:none}
+details.fold summary::-webkit-details-marker{display:none}
+details.fold summary::after{content:"+";font:900 24px/1 var(--display);color:var(--orange)}
+details.fold[open] summary::after{content:"\2212"}
+details.fold .fb{padding:0 0 14px;color:var(--muted)}
+details.fold .fb p{margin:0 0 8px}
+details.fold .fb b{color:var(--text)}
+/* top bar: who you are + progress */
+.me{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:14px}
+.progress{display:flex;flex-wrap:wrap;gap:6px 14px;font:500 13px/1.3 var(--mono);color:var(--muted);margin:4px 0 0}
+.progress span::before{content:"\25CB  ";color:var(--line)}
+.progress span.y{color:var(--text)}
+.progress span.y::before{content:"\2713  ";color:var(--good)}
+/* steps */
+.step{background:var(--asphalt-2);border:1px solid var(--line);border-radius:8px;padding:16px;margin:16px 0}
+.sh2{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--orange);color:#17191b;display:grid;place-items:center;font:900 20px/1 var(--display)}
+.sh2 h2{font-size:28px}
+.step .lead{margin:0 0 10px;color:var(--muted)}
+.cons{display:flex;gap:12px;align-items:flex-start;margin:6px 0 8px;font-weight:700;cursor:pointer}
+.cons input{width:26px;height:26px;flex:none;margin:0;accent-color:var(--orange)}
+.step .done-line{display:none}
+.step.done .sign-body{display:none}
+.step.done .done-line{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.step.done .num{background:var(--good)}
+.done-line b{color:var(--good)}
+/* nav: the main job big, the extras small */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px}
+.tabs .more-lab{flex:1 1 100%;font:500 12px/1 var(--mono);letter-spacing:.12em;color:var(--kraft);text-transform:uppercase;margin-top:8px}
+.tabs button{min-height:42px;padding:0 14px;border:2px solid var(--line);background:var(--asphalt-2);color:var(--text);border-radius:22px;font:700 15px/1 var(--body);cursor:pointer}
+.tabs button.big{flex:1 1 100%;min-height:52px;border-radius:6px;font:900 22px/1 var(--display);text-transform:uppercase}
+.tabs button.on{background:var(--orange);border-color:var(--orange);color:#17191b}
+.more{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+details.c{background:var(--asphalt-2);border:1px solid var(--line);border-radius:8px;margin:0 0 8px}
+details.c summary{list-style:none;cursor:pointer;padding:12px 16px;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;min-height:56px}
+details.c summary::-webkit-details-marker{display:none}
+details.c summary h3{font-size:28px;grid-column:1}
+details.c summary .r{color:var(--muted);font-size:14px;grid-column:1}
+details.c summary .prog{grid-column:2;grid-row:1 / span 2;font:500 12px/1.3 var(--mono);color:var(--kraft);text-align:right}
+details.c[open]{border-color:var(--orange)}
+details.c[open] summary{border-bottom:1px solid var(--line)}
+.cb{padding:6px 16px 16px}
+.sec{font:900 18px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--kraft);margin:18px 0 4px}
+.stat{padding:12px 0;border-top:1px dashed var(--line)}
+.srow{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.sname{font-weight:700}
+.val{font:700 28px/1 var(--hand);color:var(--pen);min-width:40px;text-align:right}
+.hint{font-size:13px;color:var(--muted);margin-top:2px}
+.ctl{display:flex;align-items:center;gap:8px;margin-top:6px}
+.pm{width:46px;height:46px;border:2px solid var(--line);background:var(--asphalt-3);color:var(--text);border-radius:6px;font-size:24px;cursor:pointer;flex:none}
+input[type=range]{flex:1;min-width:0;height:46px;margin:0;background:transparent;-webkit-appearance:none;appearance:none}
+input[type=range]::-webkit-slider-runnable-track{height:8px;background:var(--line);border-radius:4px}
+input[type=range]::-moz-range-track{height:8px;background:var(--line);border-radius:4px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--orange);border:3px solid var(--asphalt);margin-top:-11px}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--orange);border:3px solid var(--asphalt)}
+input[type=range].unset::-webkit-slider-thumb{background:var(--muted)}
+input[type=range].unset::-moz-range-thumb{background:var(--muted)}
+.ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted);margin-top:2px}
+.ends span:last-child{text-align:right}
+.lb{display:flex;align-items:center;gap:10px;margin-top:8px;font:500 13px/1.3 var(--mono);color:var(--pad-soft)}
+.lb input{width:110px;padding:8px}
+.clr{font-size:12px;color:var(--muted);background:none;border:0;text-decoration:underline;cursor:pointer;padding:6px 0}
+.save{display:flex;align-items:center;gap:12px;margin-top:16px}
+.ok{color:var(--pad-soft);font-weight:700}
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin:8px 0 16px}
+.picks button{min-height:46px;border:2px solid var(--line);background:var(--asphalt-3);color:var(--text);border-radius:6px;font:800 15px/1 var(--body);cursor:pointer}
+.picks button.on{background:var(--orange);border-color:var(--orange);color:#17191b}
+.q{font-weight:700;margin-top:14px}
+.tc{max-width:380px;margin:0 auto 22px;background:var(--asphalt-2);border:4px solid var(--orange);border-radius:12px;padding:14px 14px 12px}
+.tc .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.tc h3{font-size:54px;color:var(--orange)}
+.tc .nick{font:700 26px/1 var(--hand);color:var(--pen);margin-top:2px}
+.tc .role{font:500 11px/1.3 var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+.tc .row{display:grid;grid-template-columns:104px 1fr 38px;gap:6px;align-items:center;margin:4px 0;font-size:12.5px}
+.tc .row .tr{height:9px;background:var(--asphalt-3);border-radius:2px;overflow:hidden}
+.tc .row .fl{height:100%;background:var(--pad)}
+.tc .row .nm{font:500 12px/1 var(--mono);text-align:right}
+.tc .row .nm i{color:var(--pen);font-style:normal}
+.tc .sh{font:900 14px/1 var(--display);letter-spacing:.1em;color:var(--kraft);text-transform:uppercase;margin:10px 0 3px}
+.tc .badge{font-size:13px;padding:6px 8px}
+.tc .foot{font:500 11px/1.4 var(--mono);color:var(--muted);margin-top:8px}
+.lk{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:8px 0;border-top:1px dashed var(--line);font-size:14px}
+.lk .w{color:var(--orange);font-weight:800}
+.nt{border-top:1px dashed var(--line);padding:6px 0;font-size:13px;color:var(--muted)}
+.nt .r{display:block;font:600 20px/1.1 var(--hand);color:var(--pen);white-space:pre-wrap}
+footer{color:var(--muted);font-size:14px;margin:28px 0 60px;border-top:2px solid var(--line);padding-top:12px}
+@media (max-width:420px){.who{grid-template-columns:1fr 1fr}}
+</style></head><body><div id="app"></div>
+<script>
+const B={"authed":false,"who":"","consent":false,"chars":{"Danny":"Swamper, the new guy","Antonio":"Swamper","Mike":"Lead hand, driver","Sean":"Driver, does the padding","Blaine":"Driver, thirty years at the wheel","Frank":"Swamper, Joey's son","Jordan":"Swamper","Harry":"Strong, always on a call","Dave":"The warehouse guy"},"ways":{"padding":"Padding","long_piece":"Long piece: which end goes first?","loading":"Loading the truck","dolly":"The dolly","stairs":"Stairs: top or bottom man?"},"profile":[{"g":"look","title":"Look and mannerisms","fields":{"look_build":"Build","look_hair":"Hair and beard","look_clothes":"Usual clothes and hat","look_walk":"How he walks","look_laugh":"His laugh","look_habits":"Habits and gestures"}},{"g":"react","title":"How does he react when...","fields":{"react_breaks":"Something breaks","react_complaint":"A customer complains","react_walkup":"It's a third floor walk-up","react_rain":"It's raining","react_lastjob":"It's the last job of the day"}},{"g":"back","title":"Backstory","fields":{"back_how":"How he got into moving","back_years":"How long he has been at it","back_from":"Where he is from"}},{"g":"more","title":"More about him","fields":{"peeves":"Pet peeves and fears","lunch":"Lunch and gas station order","pockets":"What's in his pockets","gear":"Favourite tool or lucky item","best_with":"Who he works best with","argues_with":"Who he argues with","lift_pick":"Who he would pick for a two-man lift","lore":"Inside jokes and legends"}}],"stats":[{"k":"work_ethic","g":"work","label":"Work ethic","lo":"lazy, does the minimum","hi":"hardest worker on the crew","hint":"Laziness counts here: dodging the heavy stuff, long breaks, disappearing."},{"k":"lifting","g":"work","label":"Lifting","lo":"light work","hi":"heavy hitter","hint":""},{"k":"carefulness","g":"work","label":"Carefulness","lo":"rough with things","hi":"treats it like glass","hint":""},{"k":"driving","g":"work","label":"Driving","lo":"white-knuckle ride","hi":"smooth operator","hint":""},{"k":"stamina","g":"work","label":"Stamina","lo":"needs a breather","hi":"never gasses out","hint":""},{"k":"charm","g":"work","label":"Client charm","lo":"keeps to himself","hi":"clients love him","hint":""},{"k":"speed","g":"work","label":"Speed","lo":"slow and steady","hi":"fastest on the crew","hint":""},{"k":"loading","g":"work","label":"Truck loading","lo":"just throws it on","hi":"Tetris master","hint":""},{"k":"padding","g":"work","label":"Padding & wrapping","lo":"one pad and pray","hi":"wrapped like a gift","hint":""},{"k":"teamwork","g":"work","label":"Teamwork on two-man lifts","lo":"goes his own way","hi":"perfect partner","hint":""},{"k":"stairs","g":"work","label":"Stairs","lo":"hates stairs","hi":"loves a third floor walk-up","hint":""},{"k":"tools","g":"work","label":"Taking apart \/ putting together","lo":"where's the drill?","hi":"has the bed apart in two minutes","hint":""},{"k":"chattiness","g":"personality","label":"Chattiness","lo":"silent type","hi":"never stops talking","hint":""},{"k":"temper","g":"personality","label":"Temper","lo":"never rattled","hi":"short fuse","hint":""},{"k":"humour","g":"personality","label":"Humour","lo":"dead serious","hi":"funniest guy on the truck","hint":""},{"k":"roasting","g":"personality","label":"Roasting","lo":"never says a word","hi":"roasts everybody","hint":""},{"k":"takes_joke","g":"personality","label":"Takes a joke","lo":"thin skin","hi":"laughs at himself","hint":""}],"hated":{"piano":"Piano","gun safe":"Gun safe","treadmill":"Treadmill","sleeper sofa":"Sleeper sofa","fridge":"Fridge","washer\/dryer":"Washer\/dryer","dresser":"Dresser","bookshelf":"Bookshelf","hot tub":"Hot tub","other":"Other"},"likely":[{"k":"best_driver","label":"Best driver"},{"k":"first_break","label":"First to take a break"},{"k":"biggest_tip","label":"Gets the biggest tip"},{"k":"gets_lost","label":"Gets lost on the way to the job"},{"k":"radio_boss","label":"Controls the radio"},{"k":"breaks_something","label":"Breaks something today"},{"k":"client_flirts_with","label":"Gets hit on by a client"},{"k":"complains_stairs_first","label":"Complains about the stairs first"}]};
+const app=document.getElementById('app');
+const NAMES=Object.keys(B.chars);
+let tab='rate',mine={},likelyMine={},ratedSet={};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>n==null?'-':(Math.round(n*10)/10).toString();
+const lbs=r=>Math.round((20+5*r)*2.20462);
+const ratingFromLb=l=>Math.max(1,Math.min(10,(l/2.20462-20)/5));
+async function api(a,data){const f=new FormData();f.append('a',a);for(const k in(data||{}))f.append(k,data[k]);
+  const r=await fetch('/private/',{method:'POST',body:f,credentials:'same-origin'});let j={};try{j=await r.json()}catch(e){}
+  if(r.status===401&&j.err==='login'){B.authed=false;render();throw new Error('login')}return j}
+function render(){B.authed?mainView():loginView()}
+function loginView(){
+  app.innerHTML=`<header class="hero"><img class="bg" src="/assets/hero.jpg" alt="" fetchpriority="high"><div class="wrap"><img class="tl" src="/assets/truck-logo.svg" alt="Heavy Movers" width="80" height="48"><div class="eyebrow">Crew only</div>
+  <h1>Heavy <span class="o">Movers</span></h1><p class="sub">Crew only. Enter the password.</p>
+  <div class="panel"><input type="password" id="pw" autocomplete="current-password" placeholder="Password"><div class="err" id="err"></div>
+  <button class="btn primary" id="go">Come in</button></div></div></header>`;
+  const go=async()=>{const j=await api('login',{pw:document.getElementById('pw').value});
+    if(j.ok){B.authed=true;render()}else document.getElementById('err').textContent=j.err||'Try again.'};
+  document.getElementById('go').onclick=go;document.getElementById('pw').onkeydown=e=>{if(e.key==='Enter')go()};}
+function hype(){return `<div class="perk"><div class="wrap">Agree to be in the game and you get 1% of what it makes.</div></div>
+  <header class="hero"><img class="bg" src="/assets/hero.jpg" alt="" fetchpriority="high"><div class="wrap">
+  <img class="tl" src="/assets/truck-logo.svg" alt="Heavy Movers" width="80" height="48"><div class="eyebrow">Just the crew</div><h1 class="calm">Hey guys.</h1>
+  <p class="sub">This is where you help me make your guy for the game. Rate the crew, and add anything else if you feel like it. Skip whatever you want.</p>
+  <button class="btn primary" id="cta">Let's go &darr;</button></div></header>
+  <div class="wrap">
+  <details class="fold"><summary>The deal</summary><div class="fb">
+  <p><b>If you agree to be in the game and it does well, you get 1% of the earnings.</b> If it does really well, I'm taking everybody on a trip. The more you fill in, the better it gets. I think there's a good chance it works out.</p>
+  <p><b>Release: spring 2027, aiming for March.</b> I'll know better once my new computer's set up (about 2 weeks). I won't put it out until it's right.</p>
+  <p>This page is temporary. Want a rough look at the game so far? Check the <a href="https://heavymovers.psilo.dev/" target="_blank" rel="noopener" style="color:var(--orange)">main Heavy Movers page</a>.</p></div></details>
+  <details class="fold"><summary>How the stats work</summary><div class="fb">
+  <p>Everybody's votes get averaged, and that becomes each guy's stats. It's anonymous, even I won't know who picked what. The more you play your guy, the better he gets.</p>
+  </div></details></div>`}
+function whoPicker(){return `<div class="wrap" id="rate"><section class="step"><div class="sh2"><span class="num">1</span><h2>Who are you?</h2></div>
+  <p class="lead">Tap your name. It just keeps your rating of yourself separate. It isn't saved with your votes.</p>
+  <div class="who">${NAMES.map(n=>`<button data-n="${esc(n)}">${esc(n)}</button>`).join('')}</div>
+  <details class="fold"><summary>Not on the list?</summary><div class="fb"><input type="text" id="other" maxlength="24" placeholder="Your name"><div class="err" id="err"></div>
+  <button class="btn alt" id="oth" style="margin-top:8px">Use this name</button></div></details></section></div>`}
+function progress(){const p=document.getElementById('progrow');if(!p)return;const n=Object.keys(ratedSet).length;
+  p.innerHTML=`<span class="y">${esc(B.who)}</span><span class="${B.consent?'y':''}">Signed on</span><span class="${n?'y':''}">${n} of ${NAMES.length} guys rated</span>`;
+  const st=document.getElementById('step-sign');if(st)st.classList.toggle('done',!!B.consent);
+  const dn=document.getElementById('signedas');if(dn)dn.textContent=B.consent_name||B.who}
+async function mainView(){
+  app.innerHTML=hype()+(B.who?`<div class="wrap" id="rate"><div id="main"></div></div>`:whoPicker());
+  document.getElementById('cta').onclick=()=>document.getElementById('rate').scrollIntoView();
+  if(!B.who){const pick=async n=>{const j=await api('who',{name:n});if(j.ok){B.who=n;mine={};mainView()}else{const e=document.getElementById('err');e.closest('details').open=true;e.textContent=j.err}};
+    app.querySelectorAll('.who button').forEach(b=>b.onclick=()=>pick(b.dataset.n));
+    document.getElementById('oth').onclick=()=>pick(document.getElementById('other').value);return}
+  const m=document.getElementById('main');
+  const tb=(t,l,big)=>`<button data-t="${t}" class="${big?'big ':''}${tab===t?'on':''}">${l}</button>`;
+  m.innerHTML=`<div class="me"><div class="progress" id="progrow"></div><button class="link" id="sw">Not ${esc(B.who)}?</button></div>
+  <section class="step" id="step-sign"><div class="sh2"><span class="num">2</span><h2>Sign on</h2></div>
+  <div class="sign-body"><p class="lead">Only needed if you save something. Type your name and tick the box.</p>
+  <input type="text" id="signname" maxlength="60" placeholder="Type your name" autocomplete="name">
+  <label class="cons" style="margin-top:12px"><input type="checkbox" id="cons"><span>I agree to be in the game. If it makes money, I get 1% of the earnings.</span></label></div>
+  <div class="done-line"><span><b>&#10003; You're in</b> as <span id="signedas"></span></span><button class="link" id="unsign" type="button">change</button></div>
+  <div class="err" id="conserr"></div></section>
+  <div class="tabs">${tb('rate','Rate the crew',1)}<span class="more-lab">Or add something (all optional)</span>${tb('idea','Ideas')}${tb('job','The job')}${tb('story','Stories')}${tb('voice','Voice &amp; photos')}${tb('res','See results')}</div>
+  <div id="body"></div><footer>Every stat grows as you play him (levels 0-10). Everybody keeps his own strengths.</footer>`;
+  document.getElementById('sw').onclick=()=>{B.who='';mine={};mainView()};
+  document.getElementById('unsign').onclick=()=>{document.getElementById('step-sign').classList.remove('done')};
+  m.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;mainView().then(()=>document.getElementById('body').scrollIntoView())});
+  const cons=document.getElementById('cons'),sn=document.getElementById('signname'),ce=document.getElementById('conserr');
+  const sendConsent=async()=>{const on=cons.checked;if(on&&sn.value.trim().length<2){cons.checked=false;ce.textContent='Type your name first, then tick the box.';sn.focus();return}
+    const r=await api('consent',{on:on?'1':'0',name:sn.value});if(r.ok){B.consent=on;B.consent_name=sn.value;ce.textContent='';progress()}else{cons.checked=!on;ce.textContent='Could not save that, try again.'}};
+  cons.onchange=sendConsent;sn.onchange=()=>{if(cons.checked)sendConsent()};
+  const j0=await api('mine');B.consent=!!j0.consent;B.consent_name=j0.consent_name||'';B.cname=j0.cname||'';cons.checked=B.consent;sn.value=B.consent_name;
+  ratedSet={};for(const n in(j0.mine||{})){const s=(j0.mine[n]||{}).stats;if(s&&Object.keys(s).length)ratedSet[n]=1}progress();
+  if(tab==='rate'){mine=j0.mine||{};likelyMine=Array.isArray(j0.likely)?{}:(j0.likely||{});rateView()}else if(tab==='idea'||tab==='job'||tab==='story')notesView(tab);else if(tab==='voice')voiceView();else resView();}
+function statBlock(s,m){const v=m.stats&&m.stats[s.k]!=null?m.stats[s.k]:0;
+  return `<div class="stat" data-k="${s.k}"><div class="srow"><span class="sname">${esc(s.label)}</span><span class="val">${v?fmt(v):'–'}</span></div>
+  ${s.hint?`<div class="hint">${esc(s.hint)}</div>`:''}
+  <div class="ctl"><button class="pm" data-d="-.5" aria-label="less">&minus;</button><input type="range" class="${v?'':'unset'}" min="0" max="10" step=".5" value="${v}"><button class="pm" data-d=".5" aria-label="more">+</button></div>
+  <div class="ends"><span>1 &middot; ${esc(s.lo)}</span><span>10 &middot; ${esc(s.hi)}</span></div>
+  ${s.k==='lifting'?`<div class="lb"><span>or type pounds</span><input type="number" inputmode="numeric" min="20" max="600" class="lbi" value="${m.lifting_lb&&v?m.lifting_lb:''}"><span class="lbh"></span></div>`:''}
+  ${v?'':''}<button class="clr" type="button" ${v?'':'hidden'}>clear</button></div>`}
+function rateView(){
+  const body=document.getElementById('body');
+  const sec=(g,t,m)=>`<div class="sec">${t}</div>`+B.stats.filter(s=>s.g===g).map(s=>statBlock(s,m)).join('');
+  body.innerHTML=`<section class="step"><div class="sh2"><span class="num">3</span><h2>Rate the crew</h2></div>
+  <p class="lead">Tap a guy, slide what you know, hit save. Empty means no vote. Be honest, it's anonymous.</p>
+  <div id="cnpanel">${B.cname?`<p style="margin:6px 0 12px">Your character: <b style="font:900 26px/1 var(--display);text-transform:uppercase;color:var(--orange)">${esc(B.cname)}</b> <span class="hint">(locked in)</span></p>`:
+  `<details class="fold" style="margin-bottom:12px"><summary>Name your character</summary><div class="fb"><p>I'd go with your real name, but you can pick something else. Once it's locked in it stays, so think about it.</p>
+  <input type="text" id="cname" maxlength="30" placeholder="Character name">
+  <div class="save"><button class="btn primary" id="cnset">Lock it in</button><span class="ok" id="cnok"></span></div></div></details>`}</div>`+
+  NAMES.map(n=>{const m=mine[n]||{stats:{}};const cnt=Object.keys(m.stats||{}).length;
+    return `<details class="c" data-c="${esc(n)}"><summary><h3>${esc(n)}</h3><span class="r">${esc(B.chars[n])}</span><span class="prog">${cnt?cnt+' rated':'not rated'}</span></summary><div class="cb">
+    ${sec('work','Work',m)}${sec('personality','Personality',m)}
+    <details class="sub"><summary>How he likes it done</summary><p class="hint" style="margin:0 0 4px">Everybody's got their own way. What's his?</p>
+    ${Object.entries(B.ways).map(([k,l])=>`<label class="t">${esc(l)}</label><input type="text" class="way" data-w="${k}" maxlength="300" value="${esc((m.ways||{})[k]||'')}">`).join('')}</details>
+    ${B.profile.map(g=>`<details class="sub"><summary>${esc(g.title)}</summary>${Object.entries(g.fields).map(([k,l])=>`<label class="t">${esc(l)}</label><input type="text" class="pf" data-p="${k}" maxlength="300" value="${esc((m.profile||{})[k]||'')}">`).join('')}</details>`).join('')}
+    <details class="sub"><summary>Nickname, radio, sayings</summary>
+    <label class="t">Nickname the crew calls him</label><input type="text" class="nick" maxlength="40" value="${esc(m.nickname||'')}">
+    <label class="t">What he puts on the radio</label><input type="text" class="radio" maxlength="120" value="${esc(m.radio||'')}">
+    <label class="t">Most hated piece to move</label><select class="hated"><option value="">Pick one</option>${Object.entries(B.hated).map(([k,l])=>`<option value="${esc(k)}" ${m.hated===k?'selected':''}>${esc(l)}</option>`).join('')}</select>
+    <input type="text" class="hother" maxlength="60" placeholder="Which piece?" value="${esc(m.hated_other||'')}" style="margin-top:8px;${m.hated==='other'?'':'display:none'}">
+    <label class="t">What the game got wrong</label><textarea class="wrong" maxlength="1500">${esc(m.wrong||'')}</textarea>
+    <label class="t">Things he really says</label><textarea class="says" maxlength="1500">${esc(m.says||'')}</textarea></details>
+    <div class="save"><button class="btn primary">Save ${esc(n)}</button><span class="ok"></span></div></div></details>`}).join('')+
+  `</section>
+  <details class="fold"><summary>Bonus: who's most likely to...</summary><div class="fb"><div id="likely">${B.likely.map(q=>`<div class="q" style="color:var(--text)">${esc(q.label)}</div><div class="picks" data-k="${q.k}">${NAMES.map(n=>`<button type="button" data-n="${esc(n)}" class="${likelyMine[q.k]===n?'on':''}">${esc(n)}</button>`).join('')}</div>`).join('')}
+  <div class="save"><button class="btn primary" id="lksave">Save my picks</button><span class="ok" id="lkok"></span></div></div></div></details>
+  <div class="lab">Got more? (optional)</div><div class="more"><button class="btn alt" data-go="idea">Add an idea</button><button class="btn alt" data-go="job">Tell me about the job</button><button class="btn alt" data-go="story">Tell a story</button></div>`;
+  body.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{tab=b.dataset.go;mainView().then(()=>document.getElementById('body').scrollIntoView())});
+  const cnb=document.getElementById('cnset');
+  if(cnb)cnb.onclick=async()=>{const v=document.getElementById('cname').value.trim(),ok=document.getElementById('cnok');
+    if(v.length<2){ok.textContent='Type a name first.';return}
+    if(!confirm('Lock in "'+v+'" as your character name? You can\'t change it after.'))return;
+    ok.textContent='Saving...';try{const r=await api('cname_set',{name:v});
+      if(r.ok){B.cname=r.name;rateView()}else{ok.textContent=r.err==='consent'?'Sign on at the top first':(r.err==='who'?'Pick your name first':(r.err||'Not saved'));if(r.err==='consent')needConsent()}}catch(e){ok.textContent='Not saved, try again'}};
+  body.querySelectorAll('.stat').forEach(s=>{
+    const r=s.querySelector('input[type=range]'),o=s.querySelector('.val'),clr=s.querySelector('.clr'),lbi=s.querySelector('.lbi'),lbh=s.querySelector('.lbh');
+    const show=v=>{r.value=v;r.classList.toggle('unset',!v);o.textContent=v?fmt(v):'–';clr.hidden=!v;
+      if(lbi&&lbh)lbh.textContent=v?'about '+lbs(v)+' lb solo':''};
+    const setv=(v,fromLb)=>{v=Math.round(v*2)/2;if(v<1)v=0;if(v>10)v=10;show(v);if(lbi&&!fromLb)lbi.value=v?lbs(v):''};
+    r.oninput=()=>setv(parseFloat(r.value));
+    s.querySelectorAll('.pm').forEach(b=>b.onclick=()=>{const c=parseFloat(r.value)||0;const d=parseFloat(b.dataset.d);setv(c?c+d:5.5)});
+    clr.onclick=()=>{setv(0);if(lbi)lbi.value=''};
+    if(lbi){lbi.oninput=()=>{const l=parseFloat(lbi.value);if(l>=20)setv(ratingFromLb(l),true);else if(!lbi.value)setv(0,true)};show(parseFloat(r.value)||0)}
+  });
+  const cards=[...body.querySelectorAll('details.c')];
+  cards.forEach(card=>card.addEventListener('toggle',()=>{if(card.open){cards.forEach(o=>{if(o!==card)o.open=false});card.scrollIntoView({block:'start'})}}));
+  cards.forEach(card=>{
+    const hs=card.querySelector('.hated'),ho=card.querySelector('.hother');hs.onchange=()=>{ho.style.display=hs.value==='other'?'':'none'};
+    const btn=card.querySelector('.cb>.save .btn'),ok=card.querySelector('.cb>.save .ok'),prog=card.querySelector('.prog');
+    btn.onclick=async()=>{const stats={};card.querySelectorAll('.stat').forEach(s=>{const v=parseFloat(s.querySelector('input[type=range]').value);if(v>=1)stats[s.dataset.k]=v});
+      const lbv=card.querySelector('.lbi');ok.textContent='Saving...';
+      try{const j=await api('save',{char:card.dataset.c,stats:JSON.stringify(stats),lifting_lb:lbv&&lbv.value?lbv.value:'',ways:JSON.stringify(Object.fromEntries([...card.querySelectorAll('.way')].map(i=>[i.dataset.w,i.value]))),profile:JSON.stringify(Object.fromEntries([...card.querySelectorAll('.pf')].map(i=>[i.dataset.p,i.value]))),nickname:card.querySelector('.nick').value,radio:card.querySelector('.radio').value,
+        hated:hs.value,hated_other:ho.value,wrong:card.querySelector('.wrong').value,says:card.querySelector('.says').value});
+        ok.textContent=j.ok?'Saved':(j.err==='who'?'Pick your name first':(j.err==='consent'?'Sign on at the top first':'Not saved, try again'));if(j.err==='consent')needConsent();
+        if(j.ok){const c=Object.keys(stats).length;prog.textContent=c?c+' rated':'not rated';if(c)ratedSet[card.dataset.c]=1;else delete ratedSet[card.dataset.c];progress()}}catch(e){ok.textContent='Not saved, try again'}};});
+  body.querySelectorAll('.picks').forEach(p=>p.querySelectorAll('button').forEach(b=>b.onclick=()=>{p.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on')}));
+  document.getElementById('lksave').onclick=async()=>{const picks={};body.querySelectorAll('.picks').forEach(p=>{const on=p.querySelector('.on');if(on)picks[p.dataset.k]=on.dataset.n});
+    const ok=document.getElementById('lkok');ok.textContent='Saving...';try{const j=await api('likely_save',{picks:JSON.stringify(picks)});ok.textContent=j.ok?'Saved':(j.err==='consent'?'Sign on at the top first':'Not saved, try again');if(j.err==='consent')needConsent()}catch(e){ok.textContent='Not saved, try again'}};}
+const NOTE={
+ idea:{title:'Ideas',note:`Anything you want to see in the game: jobs, customers, furniture, sayings, jokes. One idea per note, short is fine.`,label:'Your idea',btn:'Add idea',cats:true,noun:'idea'},
+ job:{title:'The job',note:`How the work really goes: a normal day, the tricky stuff, the gear, the little things only movers know. As much as you want. No real customer names or addresses.`,label:'About the job',btn:'Add to the job notes',cats:false,noun:'note'},
+ story:{title:'Stories',note:`Something that happened on a job. Tell it like you would on the truck. No real customer names or addresses. Stuck? Tap a prompt.`,label:'Your story',btn:'Add my story',cats:false,noun:'story'}};
+function needConsent(){const st=document.getElementById('step-sign');if(st)st.classList.remove('done');const e=document.getElementById('conserr');e.textContent='Type your name and tick the box to sign on, then save again.';document.getElementById('step-sign').scrollIntoView()}
+async function notesView(kind){
+  const cfg=NOTE[kind],body=document.getElementById('body');body.innerHTML='<p class="hint">Loading...</p>';
+  const j=await api('ideas',{kind});
+  body.innerHTML=`<section class="step"><div class="sh2"><h2>${cfg.title}</h2></div><p class="lead">${cfg.note}</p>
+  ${cfg.cats?`<label class="t">Type of idea</label><select id="icat"><option>Jobs &amp; customers</option><option>Furniture &amp; items</option><option>Sayings &amp; jokes</option><option>Features</option><option>Other</option></select>`:''}
+  ${kind==='story'?`<div class="chips">${['Worst job','Best tip','Closest call','Weirdest thing I found in a house','Dumbest injury','Biggest piece I ever moved'].map(t=>`<button type="button" data-chip="${esc(t)}">${esc(t)}</button>`).join('')}</div>`:''}
+  <label class="t">${cfg.label}</label><textarea id="itext" maxlength="${kind==='idea'?800:6000}" style="min-height:${kind==='idea'?'110px':'220px'}"></textarea>
+  ${kind==='story'?`<label class="ig"><input type="checkbox" id="ingame" checked><span>Put this story in the game. Untick it if you only want me to use it as background.</span></label>`:''}
+  <label class="ig"><input type="checkbox" id="ianon"><span>Post this anonymously.</span></label>
+  <div class="save"><button class="btn primary" id="iadd">${cfg.btn}</button><span class="ok" id="iok"></span></div></section>
+  <details class="fold"${j.ideas.length?'':' hidden'}><summary>${j.ideas.length} ${cfg.noun}${j.ideas.length===1?'':'s'} so far</summary><div class="fb">
+  ${j.ideas.map(i=>`<div class="panel"><div class="hint" style="margin:0 0 4px">${i.cat?esc(i.cat)+' &middot; ':''}${esc(i.voter||'Anonymous')}${i.kind==='story'?' &middot; '+(i.in_game?'in the game':'background only'):''}</div><div style="font:600 22px/1.15 var(--hand);color:var(--pen);white-space:pre-wrap">${esc(i.text)}</div>${i.mine?`<button class="clr" data-id="${esc(i.id)}">delete my note</button>`:''}</div>`).join('')}</div></details>`;
+  body.querySelectorAll('[data-chip]').forEach(b=>b.onclick=()=>{const t=document.getElementById('itext');t.value=(t.value?t.value+'\n\n':'')+b.dataset.chip+': ';t.focus()});
+  document.getElementById('iadd').onclick=async()=>{const ok=document.getElementById('iok');ok.textContent='Saving...';
+    try{const c=document.getElementById('icat');const ig=document.getElementById('ingame');const an=document.getElementById('ianon');const r=await api('idea_add',{kind,anon:an&&an.checked?'1':'0',in_game:ig&&ig.checked?'1':'0',cat:c?c.value:'',text:document.getElementById('itext').value});
+      if(r.ok)notesView(kind);else{ok.textContent=r.err==='who'?'Pick your name first':(r.err==='consent'?'Sign on at the top first':(r.err||'Not saved'));if(r.err==='consent')needConsent()}}catch(e){ok.textContent='Not saved, try again'}};
+  body.querySelectorAll('.clr[data-id]').forEach(b=>b.onclick=async()=>{if(confirm('Delete this note?')){await api('idea_del',{id:b.dataset.id});notesView(kind)}});}
+async function bigUpload(file,meta,onp){
+  const post=async f=>{const r=await fetch('/private/',{method:'POST',body:f,credentials:'same-origin'});let j={};try{j=await r.json()}catch(e){}j._s=r.status;return j};
+  const st=new FormData();st.append('a','up_start');st.append('size',file.size);st.append('name',file.name||'file');for(const k in meta)st.append(k,meta[k]);
+  const s=await post(st);if(!s.ok)return s;
+  const CH=8*1048576;let off=0;
+  while(off<file.size){
+    const blob=file.slice(off,off+CH);let ok=false,tries=0;
+    while(!ok){
+      try{const f=new FormData();f.append('a','up_chunk');f.append('upid',s.upid);f.append('offset',off);f.append('chunk',blob,'c');
+        const j=await post(f);
+        if(j.ok){off+=blob.size;ok=true}
+        else if(j._s===409&&typeof j.have==='number'){off=j.have;ok=true}
+        else if(j._s===401||j._s===403||j._s===404||j._s===400)return j;
+        else throw new Error('retry')}
+      catch(e){if(++tries>8)return{ok:false,err:'The connection dropped. Try again.'};await new Promise(r=>setTimeout(r,1500*tries))}}
+    onp(Math.min(99,Math.round(off/file.size*100)))}
+  const fin=new FormData();fin.append('a','up_finish');fin.append('upid',s.upid);return await post(fin)}
+let recBlob=null,recTimer=null;
+async function voiceView(){
+  const body=document.getElementById('body');body.innerHTML='<p class="hint">Loading...</p>';
+  recBlob=null;const j=await api('voices');
+  const mb=n=>(n/1048576).toFixed(1)+' MB';
+  body.innerHTML=`<section class="step"><div class="sh2"><h2>Voice &amp; photos</h2></div>
+  <p class="lead">Record yourself talking, or upload a voice memo, a photo of your face, or a video. Nobody else can see or play it.</p>
+  <details class="fold"><summary>How the voice part works</summary><div class="fb"><p>I'm not going to listen to it. It just gets fed into the computer so it can copy your voice for your guy's lines. So say whatever you want. Just talk like you normally do. Long is fine, even 20 minutes.</p>
+  <p>iPhone: in Voice Memos tap Share, then Save to Files, then choose it below. Keep this page open while it uploads.</p></div></details>
+  <details class="fold"><summary>Lines to read if you're stuck (optional)</summary><div class="fb">
+  <p>Read them how you'd really say them, in the mood shown. Change the words if that's not how you'd talk. Leave a short pause between lines.</p>
+  <ol class="lines" style="color:var(--text)">${[["Heads up!","shouting"],["Coming through!","shouting, loud"],["Not the stairs again.","annoyed"],["Okay, that's the last one.","tired, relieved"],["Watch your fingers!","urgent"],["You want the couch or the fridge first?","casual"],["Ma'am, it's not going to fit.","polite, patient"],["Who packed this box?","annoyed"],["Easy, easy, easy... down.","calm, careful"],["I'm not touching that.","refusing"],["Alright, lunch time.","happy"],["It's a hundred and fifty pounds!","shouting up the stairs"],["Got it, you good?","casual, teamwork"],["Truck's full, we're done.","satisfied"],["Thanks, have a good one.","friendly, to a customer"],["Whoa, whoa, whoa, stop!","panic"],["Ha! Never mind.","laughing"],["I told you it wasn't going to fit.","I told you so"],["How many more floors?","tired"],["Ahh, my back.","groan"]].map(l=>`<li>${esc(l[0])} <i>(${esc(l[1])})</i></li>`).join('')}</ol></div></details>
+  <div class="sec">Record</div>
+  <div class="ctl"><button class="btn primary" id="rec">Record</button><span class="hint" id="rst" style="margin:0"></span></div>
+  <audio id="prev" controls style="width:100%;margin-top:10px" hidden></audio>
+  <div class="sec">Or choose a file</div><input type="file" id="vfile" accept="audio/*,image/*,video/*,.m4a,.mp3,.wav,.aac,.ogg,.webm,.heic">
+  <label class="t">What is it? (optional)</label><input type="text" id="vtitle" maxlength="80" placeholder="Like: the piano story">
+  <label class="t">Anything to add? (optional)</label><textarea id="vnote" maxlength="500" style="min-height:64px"></textarea>
+  <label class="ig"><input type="checkbox" id="vgame"><span>Okay to use this in the game, including making a voice or face from it. Leave it unticked and I'll only use it as reference.</span></label>
+  <div class="save"><button class="btn primary" id="vup">Upload</button><span class="ok" id="vok"></span></div></section>
+  <details class="fold"><summary>Your uploads: ${j.voices.length} (${j.total} from the whole crew)</summary><div class="fb">
+  ${j.voices.map(v=>`<div class="panel"><div class="hint" style="margin:0 0 4px">${esc(v.title||({image:'Photo',video:'Video'}[v.kind]||'Recording'))} &middot; ${mb(v.bytes)} &middot; ${v.in_game?'okay for the game':'reference only'}</div>
+  ${v.kind==='image'?`<img loading="lazy" style="max-width:100%;border-radius:6px" src="/private/?a=voice_get&id=${esc(v.id)}" alt="">`:v.kind==='video'?`<video controls preload="metadata" playsinline style="width:100%;border-radius:6px" src="/private/?a=voice_get&id=${esc(v.id)}"></video>`:`<audio controls preload="none" style="width:100%" src="/private/?a=voice_get&id=${esc(v.id)}"></audio>`}${v.note?`<div class="hint">${esc(v.note)}</div>`:''}${v.mine?`<button class="clr" data-id="${esc(v.id)}">delete my file</button>`:''}</div>`).join('')}</div></details>`;
+  const rec=document.getElementById('rec'),rst=document.getElementById('rst'),prev=document.getElementById('prev');
+  let mr=null,chunks=[],t0=0;
+  rec.onclick=async()=>{
+    if(mr&&mr.state==='recording'){mr.stop();return}
+    if(!navigator.mediaDevices||!window.MediaRecorder){rst.textContent="Recording isn't supported here. Choose a file instead.";return}
+    try{const st=await navigator.mediaDevices.getUserMedia({audio:true});chunks=[];
+      const type=MediaRecorder.isTypeSupported('audio/webm;codecs=opus')?'audio/webm;codecs=opus':(MediaRecorder.isTypeSupported('audio/mp4')?'audio/mp4':'');
+      mr=type?new MediaRecorder(st,{mimeType:type}):new MediaRecorder(st);
+      mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+      mr.onstop=()=>{st.getTracks().forEach(t=>t.stop());clearInterval(recTimer);const mt=mr.mimeType||type||'audio/webm';recBlob=new Blob(chunks,{type:mt});
+        prev.src=URL.createObjectURL(recBlob);prev.hidden=false;rec.textContent='Record again';rst.textContent='Got it. Listen, then upload.'};
+      mr.start();t0=Date.now();rec.textContent='Stop';recTimer=setInterval(()=>{rst.textContent='Recording '+Math.floor((Date.now()-t0)/1000)+'s'},500)
+    }catch(e){rst.textContent="Couldn't use the microphone. Choose a file instead."}};
+  document.getElementById('vup').onclick=async()=>{
+    const ok=document.getElementById('vok'),fi=document.getElementById('vfile').files[0];
+    const file=fi||(recBlob?new File([recBlob],'recording.'+((recBlob.type||'').includes('mp4')?'m4a':'webm'),{type:recBlob.type}):null);
+    if(!file){ok.textContent='Record something or choose a file first.';return}
+    if(file.size>1536*1048576){ok.textContent='Too big. 1.5 GB max.';return}
+    const up=document.getElementById('vup');up.disabled=true;ok.textContent='Uploading 0%. Keep this page open.';
+    const meta={kind:(file.type||'').startsWith('audio')||/\.(m4a|mp3|wav|aac|ogg|weba|caf)$/i.test(file.name)?'audio':'',title:document.getElementById('vtitle').value,note:document.getElementById('vnote').value,in_game:document.getElementById('vgame').checked?'1':'0'};
+    try{const x=await bigUpload(file,meta,p=>{ok.textContent='Uploading '+p+'%. Keep this page open.'});
+      if(x.ok)voiceView();else{up.disabled=false;ok.textContent=x.err==='who'?'Pick your name first':(x.err==='consent'?'Sign on at the top first':(x.err||'Not saved'));if(x.err==='consent')needConsent()}}
+    catch(e){up.disabled=false;ok.textContent='Upload failed, try again.'}};
+  body.querySelectorAll('.clr[data-id]').forEach(b=>b.onclick=async()=>{if(confirm('Delete this file?')){await api('voice_del',{id:b.dataset.id});voiceView()}});}
+async function resView(){
+  const body=document.getElementById('body');body.innerHTML='<p class="hint">Loading...</p>';
+  const j=await api('results');
+  const rows=g=>B.stats.filter(s=>s.g===g);
+  const bar=(s,st)=>`<div class="row"><span>${esc(s.label.replace('Teamwork on two-man lifts','Teamwork').replace('Taking apart / putting together','Tools').replace('Padding & wrapping','Padding'))}</span><div class="tr"><div class="fl" style="width:${st.crew_avg?st.crew_avg*10:0}%"></div></div><span class="nm">${st.crew_avg!=null?fmt(st.crew_avg):'-'}${st.self!=null?` <i>${fmt(st.self)}</i>`:''}</span></div>`;
+  body.innerHTML=`<p class="hint">${j.voters} crew member${j.voters===1?'':'s'} have voted so far. Bars are the crew average (everyone but himself). The red number is his own rating.</p>`+
+  j.cards.map(c=>`<div class="tc"><div class="top"><div><h3>${esc(c.name)}</h3>${c.nickname?`<div class="nick">"${esc(c.nickname)}"</div>`:''}</div></div>
+    <div class="role">${esc(c.role)}</div>
+    <div class="sh">Work</div>${rows('work').map(s=>bar(s,c.stats[s.k])).join('')}
+    <div class="sh">Personality</div>${rows('personality').map(s=>bar(s,c.stats[s.k])).join('')}
+    <div class="foot">${c.hated?'Hates moving: '+esc(c.hated)+'. ':''}${c.radio.length?'Radio: '+esc(c.radio.join(' / ')):''}</div>
+    ${c.notes.length?`<details style="margin-top:8px"><summary class="hint">Crew notes (${c.notes.length})</summary>${c.notes.map(n=>`<div class="nt">${n.wrong?`<span class="r">Game got wrong: ${esc(n.wrong)}</span>`:''}${n.says?`<span class="r">Really says: ${esc(n.says)}</span>`:''}</div>`).join('')}</details>`:''}</div>`).join('')+
+  `<div class="lab">Most likely to...</div><div class="panel">${j.likely.map(q=>`<div class="lk"><span>${esc(q.label)}</span><span class="w">${q.winners.length?esc(q.winners.join(', ')):'-'}</span>
+    <span class="hint" style="grid-column:1/-1">${Object.entries(q.counts).filter(e=>e[1]>0).sort((a,b)=>b[1]-a[1]).map(e=>esc(e[0])+' '+e[1]).join(' · ')||'no picks yet'}</span></div>`).join('')}</div>`;}
+render();
+</script></body></html>
